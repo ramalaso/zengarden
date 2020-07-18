@@ -1,11 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&family=Seymour+One&display=swap");
 * {
   box-sizing: border-box;
-  margin: 0; }
+  margin: 0;
+  overflow-x: hidden;
+}
 
 body {
-  font-family: 'Open Sans', sans-serif;
-  margin: 0; }
+  font-family: "Open Sans", sans-serif;
+  margin: 0;
+  background-color: #000;
+  animation: pulse 5s infinite;
+}
 
 .intro {
   display: flex;
@@ -18,102 +23,228 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   width: 100vw;
-  height: 100vh; }
+  height: 100vh;
+}
 
 .intro header h1 {
-  font-family: 'Seymour One', sans-serif;
+  font-family: "Seymour One", sans-serif;
   font-size: 3em;
   position: absolute;
   top: 30px;
   left: 50%;
-  transform: translateX(-50%); }
+  transform: translateX(-50%);
+}
 
 .intro header h2 {
   position: absolute;
   top: 100px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 2.5em; }
+  font-size: 2.5em;
+}
 
 .intro .summary p {
   font-size: 1.5em;
-  text-align: center; }
+  text-align: center;
+  animation-duration: 3s;
+  animation-name: slidein;
+}
 
 .preamble {
   width: 25em;
-  align-items: left;
   position: absolute;
   bottom: 15px;
   left: 15px;
-  text-align: justify; }
+  text-align: justify;
+  animation-duration: 3s;
+  animation-name: slidein;
+}
 
 .main {
+  width: 100vw;
+  height: 220vh;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-template-rows: 50% 50%;
-  background-color: #000;
-  color: #fff;
-  justify-content: center; }
+  grid-template-areas: "explanation participation benefits" "requirements requirements requirements" "footer footer footer";
+  justify-content: center;
+  align-items: center;
+  padding: 100px 0;
+}
 
 .explanation {
-  margin-top: 70px;
+  grid-area: explanation;
   background-image: url("./img/image4.jpg");
   background-size: 450px 300px;
   background-position: top;
   background-repeat: no-repeat;
   padding: 350px 100px 100px 100px;
-  text-align: justify; }
+  text-align: justify;
+  animation: pulse 5s infinite;
+  color: #fff;
+  height: 100vh;
+}
 
 .participation {
-  margin-top: 70px;
+  grid-area: participation;
   background-image: url("./img/image5.jpg");
   background-size: 450px 300px;
   background-position: top;
   background-repeat: no-repeat;
   padding: 350px 100px 100px 100px;
-  text-align: justify; }
+  text-align: justify;
+  color: #fff;
+  height: 100vh;
+}
 
 .benefits {
+  grid-area: benefits;
   background-image: url("./img/image6.jpg");
   background-size: 450px 300px;
   background-position: top;
   background-repeat: no-repeat;
   padding: 350px 100px 100px 100px;
   text-align: justify;
-  background-color: white;
-  color: #000; }
+  color: #fff;
+  height: 100vh;
+}
 
 .requirements {
+  grid-area: requirements;
   background-image: url("./img/image7.jpg");
-  background-size: 450px 300px;
-  background-position: top;
+  background-size: 30% 300px;
+  background-position: 50% 50px;
   background-repeat: no-repeat;
-  padding: 350px 100px 100px 100px;
-  text-align: justify;
+  padding: 400px 100px 100px 100px;
+  text-align: center;
   background-color: white;
-  color: #000; }
+  color: #000;
+  max-width: 70%;
+  margin: auto;
+  height: 100vh;
+  line-height: 2;
+}
 
-@media screen and (max-width: 780px) {
-  .main {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(4, 1fr);
+footer {
+  margin: 0;
+  width: 100vw;
+  grid-area: footer;
+  background-color: #fed519;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+footer a {
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+  border: 2px solid #fff;
+  padding: 10px 50px;
+  border-radius: 5px;
+}
+footer a:hover {
+  background-color: black;
+  color: #fff;
+}
+
+.sidebar {
+  display: none;
+}
+
+@keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+}
+@keyframes pulse {
+  0% {
     background-color: #000;
-    color: #fff;
-    justify-content: center; }
+  }
+  25% {
+    background-color: #2f2ce7;
+  }
+  50% {
+    background-color: #ff4136;
+  }
+  75% {
+    background-color: #2f2ce7;
+  }
+  100% {
+    background-color: #000;
+  }
+}
+@media screen and (max-width: 780px) {
+  header {
+    grid-area: header;
+  }
+
+  header h2 {
+    display: none;
+  }
+
+  .sumary {
+    grid-area: summary;
+  }
 
   .intro {
+    height: 250vh;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "header" "summary";
+  }
+
+  .main {
+    height: auto;
+    display: grid;
+    grid-template-areas: "explanation" "participation" "benefits" "requirements" "footer";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    background-color: #000;
+    color: #fff;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .explanation,
+.participation,
+.benefits,
+.requirements {
+    padding: 350px 0 0 0;
+    overflow: hidden;
+    height: 150vh;
+  }
+
+  .requirements {
+    background-size: 450px 300px;
+    background-repeat: no-repeat;
+    text-align: center;
+    padding: 350px 0 0 0;
+    height: 200vh;
+    overflow: hidden;
+    background-color: white;
+    color: #000;
+    max-width: 100%;
+    margin: auto;
+    line-height: 2;
+  }
+
+  footer {
+    height: 50vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 0;
-    background-image: url("./img/image.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover; }
+    gap: 10px;
+  }
 
-  .intro header h1 {
-    top: 0; } }
+  footer a {
+    width: 200px;
+    text-align: center;
+  }
+}
 
 /*# sourceMappingURL=style.css.map */
